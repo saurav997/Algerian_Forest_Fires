@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Fire Prediction with Ridge Regression</title>
+    <link rel="stylesheet" href="style.css">  </head>
+<body>
+    <header>
+        <h1>Forest Fire Prediction</h1>
+        <p>Using Ridge Regression and Machine Learning</p>
+    </header>
+    <main>
+        <section class="about-data">
+            <h2>About the Dataset</h2>
+            <p>This application utilizes the Algerian Forest Fire dataset, collected from June to September 2012. It encompasses weather observations and Fire Weather Indices (FWI) from two regions in Algeria: Bejaia and Sidi Bel-abbes.</p>
+            <p>The dataset plays a crucial role in training models to predict forest fires based on weather conditions. By analyzing factors like temperature, humidity, wind speed, and various FWI values, we can gain valuable insights and potentially mitigate fire risks.</p>
+        </section>
+        <section class="model-details">
+            <h2>Model and Scaler Details</h2>
+            <p>This application employs a Ridge Regression model trained using cross-validation to enhance its generalization capabilities. The model utilizes a StandardScaler for data normalization, ensuring all features contribute equally during prediction.</p>
+            <p><b>Important Note:</b> Columns with high correlation, namely 'DC' and 'BUI', were removed during the training process to prevent redundancy and improve model performance.</p>
+        </section>
+        <section class="prediction-form">
+            <h2>Predict Forest Fire FWI</h2>
+            <form action="/predict" method="POST">  <label for="date">Date (DD/MM/YYYY):</label>
+                <input type="date" name="date" id="date" required>
+                <label for="temp">Temperature (°C):</label>
+                <input type="number" name="temp" id="temp" step="0.01" required>
+                <label for="humidity">Relative Humidity (%):</label>
+                <input type="number" name="humidity" id="humidity" min="0" max="100" required>
+                <label for="wind_speed">Wind Speed (km/h):</label>
+                <input type="number" name="wind_speed" id="wind_speed" step="0.1" required>
+                <label for="ffmc">FFMC (Fine Fuel Moisture Code):</label>
+                <input type="number" name="ffmc" id="ffmc" step="0.1" required>
+                <label for="dmc">DMC (Duff Moisture Code):</label>
+                <input type="number" name="dmc" id="dmc" step="0.1" required>
+                <label for="isi">ISI (Initial Spread Index):</label>
+                <input type="number" name="isi" id="isi" step="0.1" required>
+                <button type="submit">Predict FWI</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
