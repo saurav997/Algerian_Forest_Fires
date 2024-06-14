@@ -1,4 +1,4 @@
-# Algerian Forest Fires Prediction
+# Algerian Forest Fires Prediction: An End-to-End Prediction model
 
 ## Project Overview
 
