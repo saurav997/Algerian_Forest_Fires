@@ -1,0 +1,230 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algerian Forest Fires Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Algerian Forest Fires Prediction</h2>
+            </div>
+            <div class="card-body">
+                {% if results is none %}
+                <h4>Enter the following details:</h4>
+                <form action="/predictdata" method="post">
+                    <div class="form-group">
+                        <label for="Temparature">Temperature (°C):</label>
+                        <input type="number" step="0.1" class="form-control" id="Temparature" name="Temparature" required title="Temperature at noon in Celsius (22-42)" min="22" max="42">
+                    </div>
+                    <div class="form-group">
+                        <label for="RH">Relative Humidity (%):</label>
+                        <input type="number" step="0.1" class="form-control" id="RH" name="RH" required title="Relative Humidity in percentage (21-90)" min="21" max="90">
+                    </div>
+                    <div class="form-group">
+                        <label for="Ws">Wind Speed (km/h):</label>
+                        <input type="number" step="0.1" class="form-control" id="Ws" name="Ws" required title="Wind speed in kilometers per hour (6-29)" min="6" max="29">
+                    </div>
+                    <div class="form-group">
+                        <label for="Rain">Rain (mm):</label>
+                        <input type="number" step="0.1" class="form-control" id="Rain" name="Rain" required title="Total daily rain in millimeters (0-16.8)" min="0" max="16.8">
+                    </div>
+                    <div class="form-group">
+                        <label for="FFMC">Fine Fuel Moisture Code (FFMC):</label>
+                        <input type="number" step="0.1" class="form-control" id="FFMC" name="FFMC" required title="Fine Fuel Moisture Code index from FWI system (28.6-92.5)" min="28.6" max="92.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="DMC">Duff Moisture Code (DMC):</label>
+                        <input type="number" step="0.1" class="form-control" id="DMC" name="DMC" required title="Duff Moisture Code index from FWI system (1.1-65.9)" min="1.1" max="65.9">
+                    </div>
+                    <div class="form-group">
+                        <label for="BUI">Buildup Index (BUI):</label>
+                        <input type="number" step="0.5" class="form-control" id="BUI" name="BUI" required title="Build Up Index is a metric used to assess the moisture content of deep, compact organic layers in the soil (0-100)" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="Classes">Classes:</label>
+                        <input type="number" step="0.1" class="form-control" id="Classes" name="Classes" required title="Class of the fire occurrence (0-1)" min="0" max="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="Region">Region:</label>
+                        <input type="number" step="0.1" class="form-control" id="Region" name="Region" required title="Region where the data was collected (0-1)" min="0" max="1">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Predict FWI</button>
+                </form>
+                {% else %}
+                <h4>Predicted Fire Weather Index (FWI):</h4>
+                <p class="alert alert-info">{{ results }}</p>
+                <h5>Implication of the FWI Value:</h5>
+                <p>The Fire Weather Index (FWI) indicates the potential fire intensity. Higher values suggest more severe fire conditions. Take necessary precautions based on the predicted FWI value.</p>
+                <a href="/predictdata" class="btn btn-primary btn-block">Predict Again</a>
+                {% endif %}
+            </div>
+        </div>
+        <footer>
+            <p>&copy; 2024 Algerian Forest Fires Prediction</p>
+        </footer>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algerian Forest Fires Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body.light-mode {
+            background-color: #f8f9fa;
+            color: #000;
+        }
+        body.dark-mode {
+            background-color: #181818;
+            color: #fff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 0 10px 10px;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="theme-toggle">
+        <label for="theme-slider">Dark Mode</label>
+        <input type="checkbox" id="theme-slider">
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Algerian Forest Fires Prediction</h2>
+            </div>
+            <div class="card-body">
+                {% if results is none %}
+                <h4>Enter the following details:</h4>
+                <form action="/predictdata" method="post">
+                    <div class="form-group">
+                        <label for="Temparature">Temperature (°C):</label>
+                        <input type="number" step="0.1" class="form-control" id="Temparature" name="Temparature" required title="Temperature at noon in Celsius (22-42)" min="22" max="42">
+                    </div>
+                    <div class="form-group">
+                        <label for="RH">Relative Humidity (%):</label>
+                        <input type="number" step="0.1" class="form-control" id="RH" name="RH" required title="Relative Humidity in percentage (21-90)" min="21" max="90">
+                    </div>
+                    <div class="form-group">
+                        <label for="Ws">Wind Speed (km/h):</label>
+                        <input type="number" step="0.1" class="form-control" id="Ws" name="Ws" required title="Wind speed in kilometers per hour (6-29)" min="6" max="29">
+                    </div>
+                    <div class="form-group">
+                        <label for="Rain">Rain (mm):</label>
+                        <input type="number" step="0.1" class="form-control" id="Rain" name="Rain" required title="Total daily rain in millimeters (0-16.8)" min="0" max="16.8">
+                    </div>
+                    <div class="form-group">
+                        <label for="FFMC">Fine Fuel Moisture Code (FFMC):</label>
+                        <input type="number" step="0.1" class="form-control" id="FFMC" name="FFMC" required title="Fine Fuel Moisture Code index from FWI system (28.6-92.5)" min="28.6" max="92.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="DMC">Duff Moisture Code (DMC):</label>
+                        <input type="number" step="0.1" class="form-control" id="DMC" name="DMC" required title="Duff Moisture Code index from FWI system (1.1-65.9)" min="1.1" max="65.9">
+                    </div>
+                    <div class="form-group">
+                        <label for="BUI">Buildup Index (BUI):</label>
+                        <input type="number" step="0.5" class="form-control" id="BUI" name="BUI" required title="Build Up Index is a metric used to assess the moisture content of deep, compact organic layers in the soil (0-100)" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="Classes">Classes:</label>
+                        <input type="number" step="0.1" class="form-control" id="Classes" name="Classes" required title="Class of the fire occurrence (0-1)" min="0" max="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="Region">Region:</label>
+                        <input type="number" step="0.1" class="form-control" id="Region" name="Region" required title="Region where the data was collected (0-1)" min="0" max="1">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Predict FWI</button>
+                </form>
+                {% else %}
+                <h4>Predicted Fire Weather Index (FWI):</h4>
+                <p class="alert alert-info">{{ results }}</p>
+                <h5>Implication of the FWI Value:</h5>
+                <p>The Fire Weather Index (FWI) indicates the potential fire intensity. Higher values suggest more severe fire conditions. Take necessary precautions based on the predicted FWI value.</p>
+                <a href="/predictdata" class="btn btn-primary btn-block">Predict Again</a>
+                {% endif %}
+            </div>
+        </div>
+        <footer>
+            <p>&copy; 2024 Algerian Forest Fires Prediction</p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('theme-slider').addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
+        });
+    </script>
+</body>
+</html>

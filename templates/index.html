@@ -1,45 +1,182 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algerian Forest Fires Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Algerian Forest Fires Prediction</h2>
+            </div>
+            <div class="card-body">
+                <h4>About the Dataset</h4>
+                <p>The Algerian Forest Fires dataset includes data collected from two regions in Algeria, Bejaia and Sidi Bel-Abbes, during the period from June to September 2012. The dataset consists of several meteorological factors that influence forest fires.</p>
+                <p>We have used this dataset to build a predictive model for the Fire Weather Index (FWI), which is an indicator of the likelihood of a fire occurring.</p>
+                
+                <h4>Model and Methodology</h4>
+                <p>This project uses a LassoCV (Least Absolute Shrinkage and Selection Operator with Cross-Validation) regression model. Lasso is a type of linear regression that uses shrinkage. Shrinkage is where data values are shrunk towards a central point, like the mean. Cross-validation is a technique for assessing how the results of a statistical analysis will generalize to an independent dataset.</p>
+                <p>We used cross-validation to tune the hyperparameters of the Lasso model, ensuring that it performs well on unseen data. Additionally, we removed highly correlated features ('DC' and 'BUI') to improve the model's performance and avoid multicollinearity.</p>
+
+                <h4>Features Used</h4>
+                <ul>
+                    <li>Temperature (°C)</li>
+                    <li>Relative Humidity (%)</li>
+                    <li>Wind Speed (km/h)</li>
+                    <li>Rain (mm)</li>
+                    <li>Fine Fuel Moisture Code (FFMC)</li>
+                    <li>Duff Moisture Code (DMC)</li>
+                    <li>Initial Spread Index (ISI)</li>
+                    <li>Region</li>
+                    <li>Classes</li>
+                </ul>
+
+                <h4>Predicting Fire Weather Index (FWI)</h4>
+                <p>To predict the FWI, please provide the necessary input values on the next page.</p>
+                <a href="/predictdata" class="btn btn-primary btn-block">Predict FWI</a>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; 2024 Algerian Forest Fires Prediction</p>
+        </footer>
+    </div>
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forest Fire Prediction with Ridge Regression</title>
-    <link rel="stylesheet" href="style.css">  </head>
-<body>
-    <header>
-        <h1>Forest Fire Prediction</h1>
-        <p>Using Ridge Regression and Machine Learning</p>
-    </header>
-    <main>
-        <section class="about-data">
-            <h2>About the Dataset</h2>
-            <p>This application utilizes the Algerian Forest Fire dataset, collected from June to September 2012. It encompasses weather observations and Fire Weather Indices (FWI) from two regions in Algeria: Bejaia and Sidi Bel-abbes.</p>
-            <p>The dataset plays a crucial role in training models to predict forest fires based on weather conditions. By analyzing factors like temperature, humidity, wind speed, and various FWI values, we can gain valuable insights and potentially mitigate fire risks.</p>
-        </section>
-        <section class="model-details">
-            <h2>Model and Scaler Details</h2>
-            <p>This application employs a Ridge Regression model trained using cross-validation to enhance its generalization capabilities. The model utilizes a StandardScaler for data normalization, ensuring all features contribute equally during prediction.</p>
-            <p><b>Important Note:</b> Columns with high correlation, namely 'DC' and 'BUI', were removed during the training process to prevent redundancy and improve model performance.</p>
-        </section>
-        <section class="prediction-form">
-            <h2>Predict Forest Fire FWI</h2>
-            <form action="/predict" method="POST">  <label for="date">Date (DD/MM/YYYY):</label>
-                <input type="date" name="date" id="date" required>
-                <label for="temp">Temperature (°C):</label>
-                <input type="number" name="temp" id="temp" step="0.01" required>
-                <label for="humidity">Relative Humidity (%):</label>
-                <input type="number" name="humidity" id="humidity" min="0" max="100" required>
-                <label for="wind_speed">Wind Speed (km/h):</label>
-                <input type="number" name="wind_speed" id="wind_speed" step="0.1" required>
-                <label for="ffmc">FFMC (Fine Fuel Moisture Code):</label>
-                <input type="number" name="ffmc" id="ffmc" step="0.1" required>
-                <label for="dmc">DMC (Duff Moisture Code):</label>
-                <input type="number" name="dmc" id="dmc" step="0.1" required>
-                <label for="isi">ISI (Initial Spread Index):</label>
-                <input type="number" name="isi" id="isi" step="0.1" required>
-                <button type="submit">Predict FWI</button>
-            </form>
-        </section>
-    </main>
+    <title>Algerian Forest Fires Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body.light-mode {
+            background-color: #f8f9fa;
+            color: #000;
+        }
+        body.dark-mode {
+            background-color: #181818;
+            color: #fff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 0 10px 10px;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="theme-toggle">
+        <label for="theme-slider">Dark Mode</label>
+        <input type="checkbox" id="theme-slider">
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Algerian Forest Fires Prediction</h2>
+            </div>
+            <div class="card-body">
+                <h4>About the Dataset</h4>
+                <p>The Algerian Forest Fires dataset includes data collected from two regions in Algeria, Bejaia and Sidi Bel-Abbes, during the period from June to September 2012. The dataset consists of several meteorological factors that influence forest fires.</p>
+                <p>We have used this dataset to build a predictive model for the Fire Weather Index (FWI), which is an indicator of the likelihood of a fire occurring.</p>
+                
+                <h4>Model and Methodology</h4>
+                <p>This project uses a LassoCV (Least Absolute Shrinkage and Selection Operator with Cross-Validation) regression model. Lasso is a type of linear regression that uses shrinkage. Shrinkage is where data values are shrunk towards a central point, like the mean. Cross-validation is a technique for assessing how the results of a statistical analysis will generalize to an independent dataset.</p>
+                <p>We used cross-validation to tune the hyperparameters of the Lasso model, ensuring that it performs well on unseen data. Additionally, we removed highly correlated features ('DC' and 'BUI') to improve the model's performance and avoid multicollinearity.</p>
+
+                <h4>Features Used</h4>
+                <ul>
+                    <li>Temperature (°C)</li>
+                    <li>Relative Humidity (%)</li>
+                    <li>Wind Speed (km/h)</li>
+                    <li>Rain (mm)</li>
+                    <li>Fine Fuel Moisture Code (FFMC)</li>
+                    <li>Duff Moisture Code (DMC)</li>
+                    <li>Initial Spread Index (ISI)</li>
+                    <li>Region</li>
+                    <li>Classes</li>
+                </ul>
+
+                <h4>Predicting Fire Weather Index (FWI)</h4>
+                <p>To predict the FWI, please provide the necessary input values on the next page.</p>
+                <a href="/predictdata" class="btn btn-primary btn-block">Predict FWI</a>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; 2024 Algerian Forest Fires Prediction</p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('theme-slider').addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
+        });
+    </script>
 </body>
 </html>

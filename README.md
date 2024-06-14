@@ -1,82 +1,61 @@
-## Algerian Forest Fire Prediction with Ridge Regression
+# Algerian Forest Fires Prediction
 
-This project utilizes machine learning to predict Forest Fire Weather Index (FWI) in Algeria. It's deployed as a web application using Flask on AWS Elastic Beanstalk.
+## Project Overview
 
-**Project Overview**
+The Algerian Forest Fires Prediction project aims to predict the Fire Weather Index (FWI), an indicator of potential fire intensity, using meteorological data. This application provides a user-friendly interface for predicting FWI values based on input parameters such as temperature, relative humidity, wind speed, and other relevant factors. The project employs a LassoCV regression model for its predictions, with features carefully selected to optimize model performance.
 
-* **Problem:** Forest fires are a major threat in Algeria. Predicting their occurrence can aid in prevention and mitigation efforts.
-* **Solution:** This project leverages the Algerian Forest Fire dataset to train a Ridge Regression model for FWI prediction.
-* **Deployment:** The model is deployed as a web application using Flask on AWS Elastic Beanstalk, allowing users to submit weather data and receive predicted FWI values.
+## Dataset Details
 
-**Data Description**
+The dataset used in this project is the Algerian Forest Fires dataset, which includes data collected from two regions in Algeria, Bejaia and Sidi Bel-Abbes, during the period from June to September 2012. The dataset consists of several meteorological factors that influence forest fires. The features used in the dataset are:
 
-The project employs the Algerian Forest Fire dataset, publicly available on UCI Machine Learning Repository and Kaggle. The dataset covers a period from June to September 2012, focusing on two Algerian regions: Bejaia and Sidi Bel-abbes. It contains weather observations and FWI values for each day:
+- **Temperature (°C)**: The temperature at noon (in Celsius degrees).
+- **Relative Humidity (%)**: The relative humidity (in percentage).
+- **Wind Speed (km/h)**: The wind speed (in kilometers per hour).
+- **Rain (mm)**: The total daily rain (in millimeters).
+- **Fine Fuel Moisture Code (FFMC)**: An index from the Fire Weather Index (FWI) system indicating the moisture content of surface litter and fine fuels.
+- **Duff Moisture Code (DMC)**: An index from the FWI system indicating the moisture content of decomposed organic material in the upper soil layer.
+- **Initial Spread Index (ISI)**: An index that combines the effects of wind and the FFMC to predict the rate of fire spread.
+- **Region**: Categorical variable indicating the region of data collection (0 for Bejaia and 1 for Sidi Bel-Abbes).
+- **Classes**: Binary variable indicating the occurrence of a fire (0 for no fire and 1 for fire).
 
-* **Date:** Day, month, and year (separate attributes)
-* **Weather Observations:**
-    * Temperature: Noontime temperature (°C)
-    * Relative Humidity (%)
-    * Wind Speed (km/h)
-    * Rain (mm)
-* **Fire Weather Indices (FWI):**
-    * FFMC (Fine Fuel Moisture Code)
-    * DMC (Duff Moisture Code)
-    * DC (Drought Code) **(Removed due to high correlation)**
-    * ISI (Initial Spread Index)
-    * BUI (Buildup Index) **(Removed due to high correlation)**
+## Methodology
 
-**Model and Scaler**
+### Data Preprocessing
 
-The project employs a Ridge Regression model trained using cross-validation to enhance its generalization capabilities. This model is suitable for datasets with potentially high collinearity. Additionally, a StandardScaler is used for data normalization, ensuring all features contribute equally during prediction.
+The dataset underwent several preprocessing steps to ensure its suitability for the predictive model:
+1. **Feature Selection**: Initially, all available features were considered. However, some features were removed due to high correlation with other features, which could lead to multicollinearity and affect model performance. Specifically, the DC (Drought Code) and BUI (Buildup Index) features were excluded.
+2. **Scaling**: All numerical features were scaled using a StandardScaler to ensure they have a mean of 0 and a standard deviation of 1, which helps improve the performance of the Lasso regression model.
 
-**Important Note:** Columns with high correlation, namely 'DC' and 'BUI', were removed during the training process to prevent redundancy and improve model performance.
+### Model Selection
 
-**Deployment on AWS Elastic Beanstalk**
+The project utilizes a LassoCV (Least Absolute Shrinkage and Selection Operator with Cross-Validation) regression model. Lasso regression is a type of linear regression that uses shrinkage, where data values are shrunk towards a central point, like the mean. Cross-validation is used to determine the best model hyperparameters and to prevent overfitting.
 
-The web application is deployed on AWS Elastic Beanstalk, a service for provisioning and managing cloud applications. Elastic Beanstalk simplifies deployment by handling server provisioning, configuration, load balancing, and scaling. 
+### Training and Evaluation
 
-**How to Use the Application**
+The model was trained on the processed dataset, with cross-validation ensuring that it generalizes well to unseen data. The removal of highly correlated features like DC and BUI helped in reducing multicollinearity, which can adversely impact the model's performance.
 
-1. **Access the application:** (Provide deployment URL here once deployed)
-2. **Enter Data:** The application provides a user-friendly form to enter relevant weather data points:
-    * Date (DD/MM/YYYY)
-    * Temperature (°C)
-    * Relative Humidity (%)
-    * Wind Speed (km/h)
-    * FFMC (Fine Fuel Moisture Code)
-    * DMC (Duff Moisture Code)
-    * ISI (Initial Spread Index)
-3. **Submit Prediction:** Click the "Predict FWI" button to submit your data.
-4. **View Results:** The application will display the predicted FWI value based on the entered weather data.
+## Application Details
 
-**Disclaimer**
+### Frontend
 
-This is a research project and the predicted FWI should not be solely relied upon for critical fire prevention decisions. 
+The application has a simple and intuitive user interface with two main pages:
 
-**Future Enhancements**
+- **Landing Page (index.html)**: This page provides an overview of the project, including information about the dataset, the model used, and the features considered. It has a button that navigates to the prediction page.
 
-* Integrate real-time weather data acquisition.
-* Develop a visual interface to display historical FWI data.
-* Explore incorporating additional features like vegetation type and topography for potentially improved prediction accuracy.
+- **Prediction Page (home.html)**: This page contains a form where users can input the required meteorological parameters. Based on the input values, the application predicts the Fire Weather Index (FWI). If no prediction is made (i.e., the page is refreshed or the form is reset), the form is displayed. If a prediction is made, the page shows the predicted FWI value and its implications.
 
-**Technical Stack**
+### Dark Mode Feature
 
-* Programming Language: Python
-* Web Framework: Flask
-* Machine Learning Library: scikit-learn
-* Deployment Platform: AWS Elastic Beanstalk
+The application includes a dark mode toggle feature to enhance user experience. A slider at the top of each page allows users to switch between light and dark themes. This feature is designed to switch the overall template gradually between light and dark modes, providing a more comfortable viewing experience under different lighting conditions. Please note that the dark mode feature is currently under development and may undergo further improvements.
 
-**Getting Started (For Developers)**
+## Conclusion
 
-1. **Clone the Repository:** (Provide your repository clone URL here)
-2. **Set Up Environment:** Install required dependencies using `pip install -r requirements.txt`.
-3. **Load Model and Scaler:** Load the pickled model and scaler objects from their respective files.
-4. **Run the Application:** Run the Flask application using `python application.py`.
+The Algerian Forest Fires Prediction project leverages a robust LassoCV regression model to predict the Fire Weather Index based on various meteorological parameters. The frontend of the application is designed to be user-friendly, providing an easy way to input data and view predictions. The ongoing addition of the dark mode feature demonstrates a commitment to enhancing user experience.
 
-**Contributing**
+## Future Work
 
-We welcome contributions to this project. Feel free to fork the repository and submit pull requests with improvements or additional functionalities.
+- **Improving Dark Mode**: Complete the dark mode feature to ensure seamless transition and enhanced visual comfort for users.
+- **Model Enhancement**: Explore other machine learning models and techniques to further improve prediction accuracy.
+- **Feature Expansion**: Consider incorporating additional relevant features to potentially enhance the model's predictive power.
 
-**License**
-
-This project is licensed under the (Specify your chosen open-source license here).
+By providing detailed insights and accurate predictions, this project aims to be a valuable tool in the early detection and management of forest fire risks in Algeria.
